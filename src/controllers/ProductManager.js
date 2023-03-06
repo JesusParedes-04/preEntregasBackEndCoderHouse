@@ -14,10 +14,16 @@ readProducts = async () => {
 }
 
 writeProducts = async (product) => {
-let products = await fs.readFile(this.path, "utf-8")
-let productsParse = JSON.parse(products);
-let productAll = [...productsParse, product]
-    await fs.writeFile(this.path,JSON.stringify(productAll))
+
+    await fs.writeFile(this.path,JSON.stringify(product))
+
+}
+
+addProducts = async (product) => {
+let productsOld = await this.readProducts()
+product.id = nanoid()
+let productAll = [...productsOld, product]
+await this.writeProducts(productAll)
 return "producto agregado"
 }
 
