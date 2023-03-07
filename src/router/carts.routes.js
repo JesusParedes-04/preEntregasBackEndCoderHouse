@@ -8,7 +8,6 @@ CartRouter.post("/", async(req,res)=>{
 
 res.send(await carts.addCarts())
 
-
 })
 
 CartRouter.get('/', async(req,res)=>{

@@ -4,9 +4,7 @@ import ProductManager from "./ProductManager.js"
 
 const productAll = new ProductManager
 
-
 class CartManager{
-
 constructor(){
     this.path = "./src/models/carts.json"
 }
@@ -19,14 +17,14 @@ readCarts = async () => {
 
 }
 
-writeCarts = async (cart) => {
+writeCarts = async (carts) => {
 
-    await fs.writeFile(this.path,JSON.stringify(cart))
+    await fs.writeFile(this.path,JSON.stringify(carts))
 
 }
 
 exist = async (id) => {
-    let carts = await this.readcarts();
+    let carts = await this.readCarts();
    return carts.find(cart => cart.id === id)
 }
 
@@ -35,7 +33,7 @@ addCarts = async()=> {
 
 let cartsOld = await this.readCarts();
 let id = nanoid()
-let cartsConcat = [{id : id, products : {}}, ...cartsOld]
+let cartsConcat = [{id : id, products : []}, ...cartsOld]
 await this.writeCarts(cartsConcat)
 return "shopping cart added"
 
@@ -57,24 +55,27 @@ addProductInCart = async(cartID,productID)=>{
     let cartsAll = await this.readCarts()
     let cartFilter = cartsAll.filter(cart => cart.id != cartID)
     
-    if(cartById.products.some (prod=> prod.id === productID)){
-        let moreProductInCart = cartById.products.find(prod => prod.id === productID)
+    if(cartById.products.some((prod) => prod.id === productID)) { 
+    let moreProductInCart = cartById.products.find(prod => prod.id === productID)
         moreProductInCart.cantidad++
-
-let cartsConcat = [cartById,...cartFilter]
-await this.writeCarts(cartsConcat)
-return "Product added to cart 2"
+    let cartsConcat = [cartById,...cartFilter]
+    await this.writeCarts(cartsConcat)
+    return "Product added to cart 2"
 
     }
 
-   cartById.products.push ({id: productById.id, cantidad:1})
+   cartById.products.push({id: productById.id, cantidad:1}) 
 
-    let cartsConcat =
-     [cartById, ...cartFilter];
+    let cartsConcat = [
+        
+    cartById, ...cartFilter];
     await this.writeCarts(cartsConcat)
     return "Product added to cart"
 }
 
 }
+
+
+
 
 export default CartManager
