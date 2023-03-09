@@ -19,10 +19,10 @@ CartRouter.get('/:id', async(req,res)=>{
 })
 
 
-CartRouter.post('/:cID/products/:pID', async(req, res)=>{
+CartRouter.post('/:cid/products/:pid', async(req, res)=>{
 
-let cardID = req.params.cID
-let productID = req.params.pID
+let cardID = req.params.cid
+let productID = req.params.pid
 res.send(await carts.addProductInCart(cardID, productID))
 
 })

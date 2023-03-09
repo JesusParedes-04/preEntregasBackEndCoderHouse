@@ -33,7 +33,7 @@ addCarts = async()=> {
 
 let cartsOld = await this.readCarts();
 let id = nanoid()
-let cartsConcat = [{id : id, products : []}, ...cartsOld]
+let cartsConcat = [{id : id, products : [ ] }, ...cartsOld]
 await this.writeCarts(cartsConcat)
 return "shopping cart added"
 
@@ -45,25 +45,26 @@ getCartsById = async(id)=>{
     return cartById
   }
 
-addProductInCart = async(cartID,productID)=>{
+addProductInCart = async(cardID,productID) => {
 
-    let cartById = await this.exist(cartID)
+    let cartById = await this.exist(cardID)
     if(!cartById) return "cart no founded"
     let productById = await productAll.exist(productID)
     if(!cartById) return "product no founded"
     
     let cartsAll = await this.readCarts()
-    let cartFilter = cartsAll.filter(cart => cart.id != cartID)
-    
-    if(cartById.products.some((prod) => prod.id === productID)) { 
+    let cartFilter = cartsAll.filter(cart => cart.id != cardID)
+
+    if(cartById.products.some(prod => prod.id === productID)) { 
     let moreProductInCart = cartById.products.find(prod => prod.id === productID)
         moreProductInCart.cantidad++
+
+
     let cartsConcat = [cartById,...cartFilter]
     await this.writeCarts(cartsConcat)
     return "Product added to cart 2"
 
     }
-
    cartById.products.push({id: productById.id, cantidad:1}) 
 
     let cartsConcat = [
@@ -74,7 +75,6 @@ addProductInCart = async(cartID,productID)=>{
 }
 
 }
-
 
 
 
