@@ -5,6 +5,7 @@ import { engine } from "express-handlebars";
 import * as path from "path"
 import __dirname from "./utils.js";
 import ProductManager from "./controllers/ProductManager.js";
+import { Server } from "socket.io";
 
 const app = express()
 const PORT = 8080
@@ -24,7 +25,7 @@ app.get("/", async(req, res) => {
 let allProducts = await product.getProducts()
     res.render("home", {
         title: "express avanzado",
-        products: allProducts
+        productslist: allProducts
     })
 })
 
@@ -32,6 +33,20 @@ app.use("/api/products", productRouter)
 app.use("/api/cart", CartRouter)
 
 
-app.listen (PORT, ()=>{
+const httpServer = app.listen (PORT, ()=>{
     console.log(`servidor express puerto ${PORT}`)
+})
+
+const socketServer = new Server(httpServer)
+
+socketServer.on('connection', (socket)=> {
+console.log('socket conectado')
+
+
+// socket.on('mensaje individual',(data)=>{
+//     console.log('mensaje del servidor', (data))
+// })
+
+
+
 })
