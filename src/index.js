@@ -13,13 +13,14 @@ const product = new ProductManager();
 app.use(express.json())
 app.use(express.urlencoded({ extended :true}))
 
-app.engine('handlebars', engine())
+
+app.engine("handlebars", engine())
 app.set("view engine", "handlebars")
 app.set("views", path.resolve(__dirname + "/views"))
 
 app.use("/", express.static(__dirname+ "/public"))
 
-app.get("/", async(req, res)=>{
+app.get("/", async(req, res) => {
 let allProducts = await product.getProducts()
     res.render("home", {
         title: "express avanzado",
