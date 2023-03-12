@@ -1,3 +1,7 @@
+
+
 const socket = io()
 
-socket.emit('mensaje individual', 'mensaje que se devuelve al cliente conectado')  //actualizar con boton y array
+socket.on('mensaje_individual',(data) => 
+console.log('mensaje del servidor:', data) )  //actualizar con boton y array
+
