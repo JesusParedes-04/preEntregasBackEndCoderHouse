@@ -4,9 +4,9 @@ import CartRouter from "./router/carts.routes.js";
 import { engine } from "express-handlebars";
 import * as path from "path"
 import __dirname from "./utils.js";
-import ProductManager from "./controllers/ProductManager.js";
 import { Server } from "socket.io";
 import realTimeProductsRouter from "./router/realTimeProducts.routes.js"
+import ProductManager from "./controllers/ProductManager.js";
 
 const app = express()
 const PORT = 8080
@@ -53,6 +53,11 @@ const socketServer = new Server(httpServer)
 
 socketServer.on('connection', (socket)=> {
 console.log('socket conectado')
-socket.emit('mensaje_individual','Mensaje que se devuelve al cliente conectado')
+
+socket.on('createProd', ({nombre, description, price, stock, code}) => {
+    const createProd = ProductManager.addProducts(nombre, description, price, stock, code)
+    socket.emit("formProduct", createProd);
+  });
+
 
 })

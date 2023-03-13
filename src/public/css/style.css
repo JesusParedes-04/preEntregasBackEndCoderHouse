@@ -28,3 +28,16 @@ color: white;
 font-family: Verdana, Geneva, Tahoma, sans-serif;
 
 }
+
+.cardContainer{
+text-align: center;
+  width: 20rem;
+  border: 2px solid white;
+  margin: 20px  
+    }
+
+    .productName {
+
+font-weight: bolder;
+font-size: 25px;
+    }

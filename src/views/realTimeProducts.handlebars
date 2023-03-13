@@ -1,27 +1,31 @@
  
  {{!-- InProgress --}}
 
-
-
-<div class="container">
-<h1 class="tittle">My Product List</h1>
-</div>
-
-
-
-<form class="m-5 container">
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-
-  <button onclick="clicka">Show Products</button>
+<form action="/realTimeProducts" id="formProducts">
+    <label for="title">Nombre</label>
+    <input id="formTitle" type="text" name="title" placeholder="Nombre">
+    <label for="description">Descripción</label>
+    <input id="formDescription" type="text" name="description" placeholder="Descripción">
+    <label for="price">Precio</label>
+    <input id="formPrice" type="number" name="price" placeholder="Precio">
+    <label for="thumbnail">Imagen</label>
+    <input id="formImg" type="file" name="thumbnail">
+    <label for="stock">Stock</label>
+    <input id="formStock" type="number" name="stock" placeholder="Stock">
+    <button id="createProd">Enviar</button>
 </form>
 
+<h2>Lista actualizada de productos</h2>
+
+<div>
+    {{#each productslist}}
+    <p class="productName" id="title">Nombre: {{this.name}}</p>
+    <p id="description">Precio: {{this.price}}</p>
+    <p id="price">Descripción: {{this.description}}</p>
+    <p id="stock">Stock: {{this.stock}}</p>
+    <p id="code">Code: {{this.code}}</p>
+    {{/each}}
 </div>
-
-
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="js/script.js"></script>

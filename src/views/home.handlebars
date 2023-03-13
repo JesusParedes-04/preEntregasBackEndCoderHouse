@@ -4,15 +4,19 @@
 </div>
 
 
+
 <div class="container__products">
 {{#each productslist}}
 
-<h2>{{this.name}}</h2>
-<h3>{{this.price}}</h3>
+
+<div class="cardContainer">
+<h2 class="productName">{{this.name}}</h2>
+<h3> $ {{this.price}}</h3>
 <p>{{this.description}}</p>
-<h2>{{this.code}}</h2>
-<h2>{{this.stock}}</h2>
-<h2>{{this.image}}</h2>
+<h2>Stock:{{this.stock}}</h2>
+<h2>Code: {{this.code}}</h2>
+</div>
+
 
 {{/each}}
 
